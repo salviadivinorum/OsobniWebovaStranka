@@ -88,7 +88,7 @@
     <div id="centrovac">
     <body>
         <header>
-        <div id="logo"><a href="index.html"><h1>Ing. David Jaroš</h1></a></div>
+        <div id="logo" title="Úvod"><a href="index.html"><h1>Ing. David Jaroš</h1></a></div>
         <nav>
             <ul>
                 <li><a href="index.html">Úvod</a></li>
@@ -143,18 +143,18 @@
                 <form id="novyform" method="POST">
                     <fieldset id="user-details">
                         <label for="jmeno">Vaše jméno:</label>
-                        <input type="text" name="jmeno"  value="<?= htmlspecialchars($jmeno) ?>"/>
+                        <input type="text" name="jmeno" title="Vaše jméno" value="<?= htmlspecialchars($jmeno) ?>"/>
 
                         <label for="email">Váš e-mail:</label>
-                        <input type="email" name="email" value="<?= htmlspecialchars($email) ?>"/>
+                        <input type="email" name="email" title="Vaše e-mailová adresa" value="<?= htmlspecialchars($email) ?>"/>
 
-                        <label for="rok">Aktuální rok:</label>
-                        <input type="text" name="rok"/>
+                        <label for="rok">Aktuální rok (ochrana proti spamu):</label>
+                        <input type="text" name="rok" title="Ochrana proti šíření spamu"/>
                     </fieldset>
                     <fieldset id="user-message">
                         <label for="zprava">Vaše zpráva:</label>
-                        <textarea name="zprava" rows="0" cols="0"><?= htmlspecialchars($zprava) ?></textarea>
-                        <input type="submit" value="Odeslat" name="submit" class="submit"/>
+                        <textarea name="zprava" rows="0" cols="0" title="Vaš zpráva"><?= htmlspecialchars($zprava) ?></textarea>
+                        <input type="submit" value="Odeslat" name="submit" title="Odeslat zprávu" class="submit"/>
                         <!--
                         <input type="reset" value="Vymazat" class="reset" onclick="ClearFields"/>
                         -->

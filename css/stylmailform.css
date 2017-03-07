@@ -90,19 +90,19 @@ form {
     margin: 20px 0 20px 0;
     width: 690px;
     background: #fff;
-    /* -- CSS3 - zakulacene rohy -- */
+    /* vytvori zakulacene rohy -- */
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
 
-    /* -- CSS3 - create a background gradient -- */
+    /* vytvori background gradient -- */
     background: -webkit-gradient(linear, 0% 0%, 0% 40%, from(#EEE), to(#FFF));
     background: -moz-linear-gradient(0% 40% 90deg,#FFF, #EEE);
 
     /* -- CSS3 - add a drop shadow -- */
-    -webkit-box-shadow:0 0 50px #ccc;
-    -moz-box-shadow:0 0 50px #ccc;
-    box-shadow:0 0 50px #ccc;
+    -webkit-box-shadow:0 0 10px #ccc;
+    -moz-box-shadow:0 0 10px #ccc;
+    box-shadow:0 0 10px #ccc;
 
 }
 
