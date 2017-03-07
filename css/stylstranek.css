@@ -251,7 +251,7 @@ article a:hover {
 
 /* zvyrazni kotvu v textu */
 .dovednosti td:target {
-    border: 4px solid darkred;
+    // border: 4px solid darkred;
     background-color: #e5eecc;
 }
 

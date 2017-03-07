@@ -27,7 +27,9 @@
             {
                 /* pri uspechu skript presmeruje na hlavicku tohoto sameho souboru s formularem emailformular.php */
                 $hlaska = 'E-mail byl úspěšně odeslán, brzy na něj odpovím.';
-                header('Location: emailformular.php?uspech=ano');
+                header('Location: kontaktform.php?uspech=ano');
+                /* header('Location:kontaktform.php#kotva'); */
+
                 exit;
             }
             else
@@ -38,12 +40,19 @@
 
         else
             /* pokud neni nejake policko formulare spravne vyplnene */
+        {
+
+           /* header('Location:kontaktform.php#kotva'); */
             $hlaska = 'Formulář není správně vyplněný !';
+
+        }
     }
 
 
 ?>
 
+<!-- tohle mel byt pokus jak si vymazat pomoci JavaScriptu policka v input -->
+<!--
 <script type="text/javascript">
     function ClearFields() {
         document.getElementById("novyform").value="";
@@ -57,6 +66,9 @@
 
     }
 </script>
+-->
+
+
 
 <!-- vlastni stranka "Kontakt" s kontaktnim formularem -->
 <!DOCTYPE html>
@@ -114,15 +126,20 @@
 
                 <!-- Vlastni kontaktni formular -->
                 <!-- Zde vlozen php skript pro vypis chybovych hlasek pri odesilani zpravy -->
+
                 <?php
                     if ($hlaska)
+                    {
                         echo('<p id="chyba">'. htmlspecialchars($hlaska) . '</p>');
+                        /* header('Location: kontaktform.php#kotva'); */
+                    }
                     /* hlida jiz jednou zadany vstup at se neztrati */
                     $jmeno = (isset($_POST['jmeno'])) ? $_POST['jmeno'] : '';
                     $email = (isset($_POST['email'])) ? $_POST['email'] : '';
                     $zprava = (isset($_POST['zprava'])) ? $_POST['zprava'] : '';
                 ?>
                 <!-- Novy formular se stylovanim -->
+
                 <form id="novyform" method="POST">
                     <fieldset id="user-details">
                         <label for="jmeno">Vaše jméno:</label>
@@ -143,6 +160,7 @@
                         -->
                     </fieldset>
                 </form>
+
                 <p></p>
             </section>
 
@@ -160,8 +178,9 @@
                 </aside>
             </div>
             <div class="cistic"></div>
+
         </article>
-        <footer>
+        <footer  >
             <p>Vytvořil &copy; Ing. David Jaroš 2017</p>
         </footer>
     </body>
