@@ -1,4 +1,5 @@
-<!-- na zacatku mam php skript pro kontrolu vstupnich poli zadanych z formulare nize -->
+<!-- na zacatku mam php skript pro kontrolu vstupnich poli zadanych z formulare z pole _POST, _GET -->
+<!-- a dale mam funkci mb_send_mail pro odeslani e-mailu z tech ziskanych form dat -->
 
 <?php
     mb_internal_encoding("UTF-8");
@@ -26,51 +27,23 @@
             if($uspech)
             {
                 /* pri uspechu skript presmeruje na hlavicku tohoto sameho souboru s formularem emailformular.php */
-                $hlaska = 'E-mail byl úspěšně odeslán, brzy na něj odpovím.';
+                $hlaska = 'Vaše zpráva byla úspěšně odeslána, brzy na ni odpovím.';
                 header('Location: kontaktform.php?uspech=ano');
-                /* header('Location:kontaktform.php#kotva'); */
-
                 exit;
             }
             else
-            {
                 $hlaska='E-mail se nepodařilo odeslat. Zkontrolujte, prosím, adresu.';
-            }
         }
-
         else
             /* pokud neni nejake policko formulare spravne vyplnene */
-        {
-
-           /* header('Location:kontaktform.php#kotva'); */
             $hlaska = 'Formulář není správně vyplněný !';
-
-        }
     }
 
 
 ?>
 
-<!-- tohle mel byt pokus jak si vymazat pomoci JavaScriptu policka v input -->
-<!--
-<script type="text/javascript">
-    function ClearFields() {
-        document.getElementById("novyform").value="";
 
-        <?php
-            /*
-        $_POST= array();
-        $_GET = array();
-            */
-        ?>
-
-    }
-</script>
--->
-
-
-
-<!-- vlastni stranka "Kontakt" s kontaktnim formularem -->
+<!-- vlastni html stranka "Kontaktform" s kontaktnim formularem -->
 <!DOCTYPE html>
 <html lang="cs-cz">
     <head>
@@ -78,15 +51,19 @@
         <meta name="keyworda" content="osobní, programátor, c#, kontakt"/>
         <meta http-equiv="content-type" content="text/html">
         <meta charset="UTF-8">
+
         <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="css/stylmailform.css"/>
-
         <link rel="shortcut icon" href="obrazky/clovek.ico"/>
+
+        <!-- jediny javascript pouzivam v teto strance = scroluje mi okno k chybove hlasce-->
+        <script type="text/javascript" src="js/presun.js"></script>
+
         <title>Kontaktní formulář</title>
     </head>
 
+    <body onload="presun()">
     <div id="centrovac">
-    <body>
         <header>
         <div id="logo" title="Úvod"><a href="index.html"><h1>Ing. David Jaroš</h1></a></div>
         <nav>
@@ -124,16 +101,11 @@
                 <p></p>
                 <p><strong>Můžete mne kontaktovat pomocí tohoto formuláře:</strong></p>
 
-                <!-- Vlastni kontaktni formular -->
-                <!-- Zde vlozen php skript pro vypis chybovych hlasek pri odesilani zpravy -->
 
+                <!--  tento php script hlida jiz jednou!!! zadany vstup at se mi znovu neztrati!!  -->
                 <?php
-                    if ($hlaska)
-                    {
-                        echo('<p id="chyba">'. htmlspecialchars($hlaska) . '</p>');
-                        /* header('Location: kontaktform.php#kotva'); */
-                    }
-                    /* hlida jiz jednou zadany vstup at se neztrati */
+
+
                     $jmeno = (isset($_POST['jmeno'])) ? $_POST['jmeno'] : '';
                     $email = (isset($_POST['email'])) ? $_POST['email'] : '';
                     $zprava = (isset($_POST['zprava'])) ? $_POST['zprava'] : '';
@@ -161,10 +133,16 @@
                     </fieldset>
                 </form>
 
+                <!-- pod formular je vlozen php skript pro vypis chybovych/uspesnych hlasek pri odesilani zpravy -->
+                <?php
+                if ($hlaska)
+                    echo('<p id="chyba" onload="presun()">'. htmlspecialchars($hlaska) . '</p>');
+                ?>
+
                 <p></p>
             </section>
 
-            <!-- vlozen postranni panel - sidebar -->
+            <!-- vlozeni postranniho panelu - sidebar -->
             <div id="sidebar">
                 <aside>
                     <ul>
@@ -180,9 +158,10 @@
             <div class="cistic"></div>
 
         </article>
-        <footer  >
+        <footer>
             <p>Vytvořil &copy; Ing. David Jaroš 2017</p>
         </footer>
-    </body>
+
     </div>
+    </body>
 </html>
